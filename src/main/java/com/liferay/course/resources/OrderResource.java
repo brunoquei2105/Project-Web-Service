@@ -10,34 +10,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liferay.course.entities.User;
-import com.liferay.course.services.UserService;
-
+import com.liferay.course.entities.Order;
+import com.liferay.course.services.OrderService;
 
 @RestController
-@RequestMapping(value= "/users")
-public class UserResource {
+@RequestMapping(value = "/orders")
+public class OrderResource {
 	
 	@Autowired
-	private UserService service;
+	private OrderService orderService;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
-		List<User> userList = service.findAll();
-		
-		return ResponseEntity.ok().body(userList);
+	public ResponseEntity<List<Order>> findAll(){
+		List<Order> orders = orderService.findAll();
+		return ResponseEntity.ok().body(orders);
 		
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User objUser = service.findById(id);
-		return ResponseEntity.ok().body(objUser);
+	public ResponseEntity<Order> findById(@PathVariable Long id){
+		Order objOrder = orderService.findById(id);
+		return ResponseEntity.ok().body(objOrder);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public void deleteById(@PathVariable Long id) {
-		service.deleteById(id);
-		
+		orderService.deleteById(id);
 	}
+
 }
