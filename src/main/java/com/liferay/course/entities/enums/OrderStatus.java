@@ -1,6 +1,5 @@
 package com.liferay.course.entities.enums;
 
-import javax.management.loading.PrivateClassLoader;
 
 public enum OrderStatus {
 	WAITING_PAYMENT(1),
