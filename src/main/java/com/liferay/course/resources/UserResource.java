@@ -50,10 +50,10 @@ public class UserResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<User> putUserById(@PathVariable Long id, 
+	public ResponseEntity<User> updateUserById(@PathVariable Long id, 
 			@RequestBody User user){
-		
-		return null;
+		user = service.updaUser(id, user);
+		return ResponseEntity.ok().body(user);
 	}
 	
 	@DeleteMapping(value = "/{id}")

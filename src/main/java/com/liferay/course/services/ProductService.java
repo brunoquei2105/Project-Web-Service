@@ -32,5 +32,21 @@ public class ProductService {
 		return productRepository.save(product);
 		
 	}
+	
+	@SuppressWarnings("deprecation")
+	public Product updateProduct(Long id, Product product) {
+		Product entityProduct = productRepository.getOne(id);
+		updateData(entityProduct, product);
+		return productRepository.save(entityProduct);
+		
+	}
+	private void updateData(Product entityProduct, Product product) {
+		
+		product.setName(product.getName());
+		product.setPrice(product.getPrice());
+		product.setDescription(product.getDescription());
+		
+	}
+	
 
 }

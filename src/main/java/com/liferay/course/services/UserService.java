@@ -32,5 +32,18 @@ public class UserService {
 	public void deleteById(Long id) {
 		userRepository.deleteById(id);
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	public User updaUser(Long id, User user) {
+		User entityUser = userRepository.getOne(id);
+		updateData(entityUser, user);
+		return userRepository.save(entityUser);
+}
+	private void updateData(User entityUser, User user) {
+		
+		entityUser.setName(user.getName());
+		entityUser.setEmail(user.getEmail());
+		entityUser.setPhone(user.getPhone());
+	}
+	
 }
