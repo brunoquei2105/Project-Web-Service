@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.liferay.course.entities.User;
 import com.liferay.course.repositories.UserRepository;
+import com.liferay.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -22,7 +23,7 @@ public class UserService {
 	}
 	public User findById(Long id) {
 		Optional<User> objOptional = userRepository.findById(id);
-		return objOptional.get();
+		return objOptional.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User createUser(User user) {
