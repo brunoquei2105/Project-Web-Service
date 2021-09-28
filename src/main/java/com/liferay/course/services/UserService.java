@@ -3,6 +3,8 @@ package com.liferay.course.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -49,9 +51,15 @@ public class UserService {
 	
 	@SuppressWarnings("deprecation")
 	public User updaUser(Long id, User user) {
+		try {
 		User entityUser = userRepository.getOne(id);
 		updateData(entityUser, user);
+		
 		return userRepository.save(entityUser);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 }
 	private void updateData(User entityUser, User user) {
 		
